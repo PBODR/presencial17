@@ -10,16 +10,16 @@
 # El siguiente código define la clase Product y además realiza la lectura del archivo.
 
 class Product
+  attr_accessor :name, :tallas
   def initialize(name, *tallas)
     @name = name
-    @tallas = tallas
+    @tallas = tallas.map(&:to_f)
   end
 
   def average
     @tallas.inject(&:+)/@tallas.size
   end
 end
-
 
 products_list = []
 data = []
@@ -29,7 +29,10 @@ data.each do |prod|
   products_list << Product.new(ls[0], ls[1], ls[2], ls[3], ls[4])
 end
 
-puts products_list
+products_list.each do |product|
+  puts product.name
+  puts product.average
+end
 # Se pide:
 
 # Optimizar el código implementando el operador splat al momento de instanciar los productos
